@@ -1,32 +1,29 @@
-fetch ("ateam.json")
-.then (function(response) {
-    return response.json()
-})
-.then (function(data) {
-    console.log("JSON-datan", data);
-    printEmp(data);
+import {data} from './modules/fetch.mjs';
+
+data.then(data => {
+    // console.log("data from fetch.mjs:", data);
+    printEmp(data)
 })
 
 const root = document.getElementById("root");
 const ul = document.createElement("ul");
 root.appendChild(ul);
 
-function printEmp(emp) {
-
-    //sortera array efter age
-    // console.log("sorterad array yngst först", emp);
-    emp.sort(function (a, b) {
+function printEmp(employees) {
+    
+    // console.log("sorterad array yngst först", employees);
+    employees.sort(function (a, b) {
         return b.age - a.age;
     });    
 
-    for (person in emp) {
-        // console.log("tar den sorterade emp", emp);
-        // console.log("emp[person]", emp[person]);
-        // console.log("vi vill skriva ut: ", emp[person].email);
+    for (let employee in employees) {
+        // console.log("tar den sorterade employees", employees);
+        // console.log("employees[employee]", employees[employee]);
+        // console.log("vi vill skriva ut: ", employees[employee].email);
 
-        empTemplate = `<li>${emp[person].title}, ${emp[person].name}, ${emp[person].email}</li>`;
+        const employeeTemplate = `<li>${employees[employee].title}, ${employees[employee].name}, ${employees[employee].email}</li>`;
 
-        ul.insertAdjacentHTML("afterbegin", empTemplate);
+        ul.insertAdjacentHTML("afterbegin", employeeTemplate);
     }
 };
 
